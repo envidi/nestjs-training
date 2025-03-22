@@ -58,6 +58,20 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Run migrations
+
+````bash
+# migrate and create file migration on folder migrations
+$ npm run migration:generate -- src/db/migrations/add-more-colum-address
+
+# Apply to database
+$ npm run migration:run
+
+# Can change folder to detect change database dist/src/db/data-source.js in package.json
+$ typeorm": "npm run build && npx typeorm -d dist/src/db/data-source.js
+
+
+
 ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
@@ -67,7 +81,7 @@ If you are looking for a cloud-based platform to deploy your NestJS application,
 ```bash
 $ npm install -g mau
 $ mau deploy
-```
+````
 
 With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
