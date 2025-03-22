@@ -3,21 +3,28 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
-import { ProductEntity, UserEntity } from 'src/typeorm';
-import { CategoryEntity } from 'src/typeorm/category.entity';
+// import { ProductEntity, UserEntity } from 'src/typeorm';
+// import { CategoryEntity } from 'src/typeorm/category.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import configuration from 'src/config/configuration';
+require('dotenv').config();
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: 'root',
-  password: 'root',
-  database: 'test',
-  entities: [UserEntity, ProductEntity, CategoryEntity],
+  host: configuration().dbHost,
+  port: configuration().dbPort,
+  username: configuration().username,
+  password: configuration().password,
+  database: configuration().dbName,
+  entities: ['dist/src/typeorm/*.entity.js'],
+  // entities: [UserEntity, ProductEntity, CategoryEntity],
   synchronize: false,
-  migrations: ['dist/db/migrations/*.js'],
+  migrations: ['dist/src/db/migrations/*.js'],
 };
+console.log(process.env.DB_HOST);
+console.log(process.env.DB_USERNAME);
+console.log(process.env.DB_PORT);
+console.log(process.env.DB_NAME);
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   inject: [ConfigService],
@@ -30,9 +37,10 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
     username: configService.get('username'),
     password: configService.get('password'),
     database: configService.get('dbName'),
-    entities: [UserEntity, ProductEntity, CategoryEntity],
+    entities: ['dist/src/typeorm/*.entity.js'],
+    // entities: [UserEntity, ProductEntity, CategoryEntity],
     synchronize: false,
-    migrations: ['dist/db/migrations/*.js'],
+    migrations: ['dist/src/db/migrations/*.js'],
   }),
 };
 
