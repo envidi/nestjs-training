@@ -26,7 +26,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   ): Promise<TypeOrmModuleOptions> => ({
     type: 'mysql',
     host: configService.get('dbHost'),
-    port: parseInt(configService.get('port')),
+    port: parseInt(configService.get('dbPort')),
     username: configService.get('username'),
     password: configService.get('password'),
     database: configService.get('dbName'),

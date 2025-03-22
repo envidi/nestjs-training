@@ -31,9 +31,6 @@ import { validate } from 'env.validation';
   providers: [AppService],
 })
 export class AppModule implements NestModule {
-  constructor(data: DataSource) {
-    console.log('Dataname:', data.driver.database);
-  }
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('user');
   }

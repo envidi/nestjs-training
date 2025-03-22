@@ -26,7 +26,6 @@ class EnvironmentVariables {
   JWT_SECRET: string;
 }
 export function validate(config: Record<string, unknown>) {
-  console.log(config);
   const validatedConfig = plainToInstance(EnvironmentVariables, config, {
     enableImplicitConversion: true,
   });
