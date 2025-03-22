@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Init1742659977690 implements MigrationInterface {
-    name = 'Init1742659977690'
+export class Init1742662750474 implements MigrationInterface {
+    name = 'Init1742662750474'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE \`users\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, \`email\` varchar(255) NOT NULL, \`phoneNumber\` varchar(255) NOT NULL, \`password\` varchar(255) NOT NULL, \`twoFASecret\` text NULL, \`twoFactorEnabled\` tinyint NOT NULL DEFAULT 0, \`apiKey\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`category\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`products\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, \`price\` int NOT NULL, \`description\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`users\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, \`email\` varchar(255) NOT NULL, \`phoneNumber\` varchar(255) NOT NULL, \`password\` varchar(255) NOT NULL, \`twoFASecret\` text NULL, \`twoFactorEnabled\` tinyint NOT NULL DEFAULT 0, \`apiKey\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`info-product\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, \`productId\` int NULL, UNIQUE INDEX \`REL_d65c9703b30456a459bbd5e07e\` (\`productId\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`product_category\` (\`categoryId\` int NOT NULL, \`productsId\` int NOT NULL, INDEX \`IDX_559e1bc4d01ef1e56d75117ab9\` (\`categoryId\`), INDEX \`IDX_a32cf3cfd513cd9feb72c64f86\` (\`productsId\`), PRIMARY KEY (\`categoryId\`, \`productsId\`)) ENGINE=InnoDB`);
         await queryRunner.query(`ALTER TABLE \`info-product\` ADD CONSTRAINT \`FK_d65c9703b30456a459bbd5e07ec\` FOREIGN KEY (\`productId\`) REFERENCES \`products\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
@@ -23,9 +23,9 @@ export class Init1742659977690 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE \`product_category\``);
         await queryRunner.query(`DROP INDEX \`REL_d65c9703b30456a459bbd5e07e\` ON \`info-product\``);
         await queryRunner.query(`DROP TABLE \`info-product\``);
+        await queryRunner.query(`DROP TABLE \`users\``);
         await queryRunner.query(`DROP TABLE \`products\``);
         await queryRunner.query(`DROP TABLE \`category\``);
-        await queryRunner.query(`DROP TABLE \`users\``);
     }
 
 }
