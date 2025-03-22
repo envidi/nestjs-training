@@ -14,9 +14,7 @@ export const seedData = async (manager: EntityManager): Promise<void> => {
     user.apiKey = uuid4();
     try {
       await manager.getRepository(UserEntity).save(user);
-      console.log('test runner12', user);
     } catch (error) {
-      console.log(error);
       throw new HttpException('Error', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
