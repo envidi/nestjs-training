@@ -21,10 +21,7 @@ export const dataSourceOptions: DataSourceOptions = {
   synchronize: false,
   migrations: ['dist/src/db/migrations/*.js'],
 };
-console.log(process.env.DB_HOST);
-console.log(process.env.DB_USERNAME);
-console.log(process.env.DB_PORT);
-console.log(process.env.DB_NAME);
+
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   inject: [ConfigService],
